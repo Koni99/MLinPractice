@@ -19,6 +19,8 @@ parser.add_argument("-s", '--seed', type = int, help = "seed for the random numb
 parser.add_argument("-e", "--export_file", help = "export the trained classifier to the given location", default = None)
 parser.add_argument("-i", "--import_file", help = "import a trained classifier from the given location", default = None)
 parser.add_argument("-m", "--majority", action = "store_true", help = "majority class classifier")
+parser.add_argument("-u", "--uniform", action = "store_true", help = "uniform distribution classifier")
+parser.add_argument("-s", "--stratified", action = "store_true", help = "random predictions respecting traning set class distributions")
 parser.add_argument("-a", "--accuracy", action = "store_true", help = "evaluate using accuracy")
 parser.add_argument("-auc", "--area", action = "store_true", help = "evaluate using area under curve")
 parser.add_argument("-c", "--cohen", action = "store_true", help = "evaluate using cohen kappa score")
@@ -40,7 +42,17 @@ else:   # manually set up a classifier
         print("    majority vote classifier")
         classifier = DummyClassifier(strategy = "most_frequent", random_state = args.seed)
         classifier.fit(data["features"], data["labels"])
-
+    elif args.uniform:
+        # uniform classifier
+        print("    uniform distribution classifier")
+        classifier = DummyClassifier(strategy = "uniform", random_state = args.seed)
+        classifier.fit(data["features"], data["labels"])
+    elif args.stratified:
+        # uniform classifier
+        print("    random predictions respecting traning set class distributions")
+        classifier = DummyClassifier(strategy = "stratified", random_state = args.seed)
+        classifier.fit(data["features"], data["labels"])
+        
 # now classify the given data
 prediction = classifier.predict(data["features"])
 
