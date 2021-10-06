@@ -124,8 +124,10 @@ By default, this data is used to train a classifier, which is specified by one o
 - `-f` or `--frequency`: Dummy classifier that makes predictions based on the label frequency in the training data.
 
 The classifier is then evaluated, using the evaluation metrics as specified through the following optional arguments:
-- `-a`or `-accuracy`: Classification accurracy (i.e., percentage of correctly classified examples).
-- `-k`or `--kappa`: Cohen's kappa (i.e., adjusting accuracy for probability of random agreement).
+- `-a` or `--accuracy`: Classification accurracy (i.e., percentage of correctly classified examples).
+- '-ab' or '--balanced_accuracy': Balanced accuracy (i.e. average of recall obtained on each class).
+- '-f1' or '--f1_score': f1 score (i.e. balanced average of precision and recall).
+- `-k` or `--kappa`: Cohen's kappa (i.e., adjusting accuracy for probability of random agreement).
 
 
 Moreover, the script support importing and exporting trained classifiers with the following optional arguments:
