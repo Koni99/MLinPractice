@@ -10,7 +10,7 @@ Created on Wed Sep 29 14:23:48 2021
 
 import argparse, pickle
 from sklearn.dummy import DummyClassifier
-from sklearn.metrics import accuracy_score, roc_auc_score, cohen_kappa_score
+from sklearn.metrics import accuracy_score, cohen_kappa_score, f1_score, balanced_accuracy_score
 
 # setting up CLI
 parser = argparse.ArgumentParser(description = "Classifier")
@@ -19,11 +19,11 @@ parser.add_argument("-s", '--seed', type = int, help = "seed for the random numb
 parser.add_argument("-e", "--export_file", help = "export the trained classifier to the given location", default = None)
 parser.add_argument("-i", "--import_file", help = "import a trained classifier from the given location", default = None)
 parser.add_argument("-m", "--majority", action = "store_true", help = "majority class classifier")
-parser.add_argument("-u", "--uniform", action = "store_true", help = "uniform distribution classifier")
-parser.add_argument("-l", "--label", action = "store_true", help = "label frequency classfier")
+parser.add_argument("-f", "--frequency", action = "store_true", help = "label frequency classifier")
 parser.add_argument("-a", "--accuracy", action = "store_true", help = "evaluate using accuracy")
-parser.add_argument("-auc", "--area", action = "store_true", help = "evaluate using area under curve")
-parser.add_argument("-c", "--cohen", action = "store_true", help = "evaluate using cohen kappa score")
+parser.add_argument("-ab", "--balanced_accuracy", action = "store_true", help = "evaluate using balanced accuracy")
+parser.add_argument("-f1", "--f1_score", action = "store_true", help = "evaluate using f1 score")
+parser.add_argument("-k", "--kappa", action = "store_true", help = "evaluate using Cohen's kappa")
 args = parser.parse_args()
 
 # load data
@@ -42,17 +42,12 @@ else:   # manually set up a classifier
         print("    majority vote classifier")
         classifier = DummyClassifier(strategy = "most_frequent", random_state = args.seed)
         classifier.fit(data["features"], data["labels"])
-    elif args.uniform:
-        # uniform classifier
-        print("    uniform distribution classifier")
-        classifier = DummyClassifier(strategy = "uniform", random_state = args.seed)
-        classifier.fit(data["features"], data["labels"])
-    elif args.stratified:
+    elif args.frequency:
         # label frequency classifier
-        print("    random predictions respecting traning set class distributions (label frequency)")
+        print("    label frequency classifier")
         classifier = DummyClassifier(strategy = "stratified", random_state = args.seed)
         classifier.fit(data["features"], data["labels"])
-        
+
 # now classify the given data
 prediction = classifier.predict(data["features"])
 
@@ -60,12 +55,13 @@ prediction = classifier.predict(data["features"])
 evaluation_metrics = []
 if args.accuracy:
     evaluation_metrics.append(("accuracy", accuracy_score))
-    
-if args.area:
-    evaluation_metrics.append(("area_under_curve", roc_auc_score))
-    
-if args.cohen:
-    evaluation_metrics.append(("cohen", cohen_kappa_score))
+if args.balanced_accuracy:
+    evaluation_metrics.append(("balanced accuracy", balanced_accuracy_score))
+if args.f1_score:
+    evaluation_metrics.append(("f1 score", f1_score))
+if args.kappa:
+    evaluation_metrics.append(("Cohen's kappa", cohen_kappa_score))
+
 # compute and print them
 for metric_name, metric in evaluation_metrics:
     print("    {0}: {1}".format(metric_name, metric(data["labels"], prediction)))
@@ -74,4 +70,3 @@ for metric_name, metric in evaluation_metrics:
 if args.export_file is not None:
     with open(args.export_file, 'wb') as f_out:
         pickle.dump(classifier, f_out)
-        
