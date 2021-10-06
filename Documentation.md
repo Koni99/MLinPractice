@@ -1,8 +1,19 @@
-# Documentaion
-## Evaluation metric
+# Documentation
+
+## Preprocessing
+
+## Feature Extraction
+
+## Dimensionality Reduction
+
+## Classification
+
+### Evaluation metric
 - Area under the curve
 - Cohen's Kappa
 
-## Evaluation baseline
+### Evaluation baseline
 - Uniform distribution classifier
 - label frequency classifier
+
+## Application
