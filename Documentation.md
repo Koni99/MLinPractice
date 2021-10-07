@@ -1,6 +1,8 @@
 # Documentation
 
 ## Preprocessing
+**Lower case**
+- turns every word in the tweet into lower case. Otherwise our classifier would think of e.g. "Dog" and "dog" as two completly different words.
 
 ## Feature Extraction
 

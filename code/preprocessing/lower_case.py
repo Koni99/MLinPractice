@@ -14,7 +14,7 @@ class LowerCase(Preprocessor):
     """Turn the text input into lower case."""
     #constructor
     def __init__(self, input_column, output_column):
-        """Initialize with the given input and output column."""
+        """Initialize with the given input (tweet) and output column (tweet_lower_case)."""
         super().__init__([COLUMN_TWEET], COLUMN_LOWERCASE)
     
     # don't need to implement _set_variables(), since no variables to set
