@@ -61,12 +61,16 @@ prediction = classifier.predict(data["features"])
 # collect all evaluation metrics
 evaluation_metrics = []
 if args.accuracy:
+    # accuracy metric
     evaluation_metrics.append(("accuracy", accuracy_score))
 if args.balanced_accuracy:
+    # balanced accuracy metric
     evaluation_metrics.append(("balanced accuracy", balanced_accuracy_score))
 if args.f1_score:
+    # f1 score metric
     evaluation_metrics.append(("f1 score", f1_score))
 if args.kappa:
+    # Cohen's kappa metric
     evaluation_metrics.append(("Cohen's kappa", cohen_kappa_score))
 
 # compute and print them
