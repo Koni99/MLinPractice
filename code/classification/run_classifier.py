@@ -19,7 +19,8 @@ parser.add_argument("-s", '--seed', type = int, help = "seed for the random numb
 parser.add_argument("-e", "--export_file", help = "export the trained classifier to the given location", default = None)
 parser.add_argument("-i", "--import_file", help = "import a trained classifier from the given location", default = None)
 parser.add_argument("-m", "--majority", action = "store_true", help = "majority class classifier")
-parser.add_argument("-f", "--frequency", action = "store_true", help = "label frequency classifier")
+parser.add_argument("-u", "--uniform", action = "store_true", help = "uniform distribution classifier")
+parser.add_argument("-l", "--label", action = "store_true", help = "label frequency classfier")
 parser.add_argument("-a", "--accuracy", action = "store_true", help = "evaluate using accuracy")
 parser.add_argument("-ab", "--balanced_accuracy", action = "store_true", help = "evaluate using balanced accuracy")
 parser.add_argument("-f1", "--f1_score", action = "store_true", help = "evaluate using f1 score")
@@ -42,9 +43,14 @@ else:   # manually set up a classifier
         print("    majority vote classifier")
         classifier = DummyClassifier(strategy = "most_frequent", random_state = args.seed)
         classifier.fit(data["features"], data["labels"])
-    elif args.frequency:
+    elif args.uniform:
+        # uniform classifier
+        print("    uniform distribution classifier")
+        classifier = DummyClassifier(strategy = "uniform", random_state = args.seed)
+        classifier.fit(data["features"], data["labels"])
+    elif args.stratified:
         # label frequency classifier
-        print("    label frequency classifier")
+        print("    random predictions respecting traning set class distributions (label frequency)")
         classifier = DummyClassifier(strategy = "stratified", random_state = args.seed)
         classifier.fit(data["features"], data["labels"])
 
@@ -70,3 +76,4 @@ for metric_name, metric in evaluation_metrics:
 if args.export_file is not None:
     with open(args.export_file, 'wb') as f_out:
         pickle.dump(classifier, f_out)
+        
