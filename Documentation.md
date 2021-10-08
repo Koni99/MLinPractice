@@ -5,6 +5,11 @@
 - turns every word in the tweet into lower case. Otherwise our classifier would think of e.g. "Dog" and "dog" as two completly different words.
 
 ## Feature Extraction
+**Sentiment Analysis**
+- added compound sentiment score as a feature. We argue that the sentiment of a tweet has an influence on its virality. 
+- we used nltk.VADER which is specifically attuned to sentiments expressed in social media
+- our function returns a score between -1 very negative and 1 very positive.
+- our hypothesis is that tweets that are in the outer range either very negative or very positive will be more popular than neutral tweets with scores around 0.
 
 ## Dimensionality Reduction
 
