@@ -10,7 +10,9 @@
 - we used nltk.VADER which is specifically attuned to sentiments expressed in social media
 - our function returns a score between -1 very negative and 1 very positive.
 - our hypothesis is that tweets that are in the outer range either very negative or very positive will be more popular than neutral tweets with scores around 0.
-
+**HashtagCounter**
+-count number of hashtags 
+- we assume that tweets with many hashtags attract more attention than tweets without hashtags.
 ## Dimensionality Reduction
 
 ## Classification
