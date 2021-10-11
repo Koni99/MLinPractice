@@ -42,17 +42,18 @@ else:   # manually set up a classifier
         # majority vote classifier
         print("    majority vote classifier")
         classifier = DummyClassifier(strategy = "most_frequent", random_state = args.seed)
-        classifier.fit(data["features"], data["labels"])
+        
     elif args.uniform:
         # uniform distribution classifier
         print("    uniform distribution classifier")
         classifier = DummyClassifier(strategy = "uniform", random_state = args.seed)
-        classifier.fit(data["features"], data["labels"])
+        
     elif args.frequency:
         # label frequency classifier
         print("    label frequency classifier")
         classifier = DummyClassifier(strategy = "stratified", random_state = args.seed)
-        classifier.fit(data["features"], data["labels"])
+    
+    classifier.fit(data["features"], data["labels"])
 
 
 # now classify the given data
