@@ -3,6 +3,9 @@
 ## Preprocessing
 
 ## Feature Extraction
+**VideoAdded**
+- check whether tweet contains at least one video
+- we assume that tweets with videos added are more likely to go viral
 
 ## Dimensionality Reduction
 
