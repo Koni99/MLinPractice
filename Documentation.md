@@ -3,6 +3,9 @@
 ## Preprocessing
 
 ## Feature Extraction
+**PhotoAdded**
+- check whether a tweet has at least one photo added
+- we assume that a tweet with photos added is more likely to go viral
 
 ## Dimensionality Reduction
 
