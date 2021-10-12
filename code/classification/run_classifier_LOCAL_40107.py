@@ -30,6 +30,7 @@ args = parser.parse_args()
 # load data
 with open(args.input_file, 'rb') as f_in:
     data = pickle.load(f_in)
+    
 
 if args.import_file is not None:
     # import a pre-trained classifier
@@ -47,7 +48,7 @@ else:   # manually set up a classifier
         # majority vote classifier
         print("    majority vote classifier")
         classifier = DummyClassifier(strategy = "most_frequent", random_state = args.seed)
-        
+        classifier.fit(data["features"], data["labels"])
     elif args.uniform:
         # uniform distribution classifier
         print("    uniform distribution classifier")
@@ -58,7 +59,6 @@ else:   # manually set up a classifier
         print("    label frequency classifier")
         classifier = DummyClassifier(strategy = "stratified", random_state = args.seed)
     
-    classifier.fit(data["features"], data["labels"])
 
 
 # now classify the given data
