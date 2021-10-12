@@ -34,12 +34,7 @@ with open(args.input_file, 'rb') as f_in:
 if args.import_file is not None:
     # import a pre-trained classifier
     with open(args.import_file, 'rb') as f_in:
-        input_dict = pickle.load(f_in)
-    classifier = input_dict["classifier"]
-    for param, value in input_dict["params"].items():
-        log_param(param, value)
-
-    log_param("dataset", "validation")
+        classifier = pickle.load(f_in)
 
 else:   # manually set up a classifier
     
@@ -47,18 +42,17 @@ else:   # manually set up a classifier
         # majority vote classifier
         print("    majority vote classifier")
         classifier = DummyClassifier(strategy = "most_frequent", random_state = args.seed)
-        
+        classifier.fit(data["features"], data["labels"])
     elif args.uniform:
         # uniform distribution classifier
         print("    uniform distribution classifier")
         classifier = DummyClassifier(strategy = "uniform", random_state = args.seed)
-        
+        classifier.fit(data["features"], data["labels"])
     elif args.frequency:
         # label frequency classifier
         print("    label frequency classifier")
         classifier = DummyClassifier(strategy = "stratified", random_state = args.seed)
-    
-    classifier.fit(data["features"], data["labels"])
+        classifier.fit(data["features"], data["labels"])
 
 
 # now classify the given data
@@ -73,16 +67,13 @@ if args.balanced_accuracy:
 if args.f1_score:
     evaluation_metrics.append(("f1 score", f1_score))
 if args.kappa:
-    evaluation_metrics.append(("Cohen_kappa", cohen_kappa_score))
+    evaluation_metrics.append(("Cohen's kappa", cohen_kappa_score))
 
 # compute and print them
 for metric_name, metric in evaluation_metrics:
-    metric_value = metric(data["labels"], prediction)
-    print("    {0}: {1}".format(metric_name, metric_value))
-    log_metric(metric_name, metric_value)
+    print("    {0}: {1}".format(metric_name, metric(data["labels"], prediction)))
     
 # export the trained classifier if the user wants us to do so
 if args.export_file is not None:
-    output_dict = {"classifier": classifier, "params": params}
     with open(args.export_file, 'wb') as f_out:
-        pickle.dump(output_dict, f_out)
+        pickle.dump(classifier, f_out)

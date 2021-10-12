@@ -30,6 +30,7 @@ args = parser.parse_args()
 # load data
 with open(args.input_file, 'rb') as f_in:
     data = pickle.load(f_in)
+    
 
 if args.import_file is not None:
     # import a pre-trained classifier
@@ -58,7 +59,10 @@ else:   # manually set up a classifier
         print("    label frequency classifier")
         classifier = DummyClassifier(strategy = "stratified", random_state = args.seed)
     
+<<<<<<< HEAD
+=======
     classifier.fit(data["features"], data["labels"])
+>>>>>>> 8192545ef7b6347f3975a75394b30d18d72767b2
 
 
 # now classify the given data
