@@ -21,8 +21,7 @@ class Tokenizer(Preprocessor):
     # don't need to implement _set_variables(), since no variables to set
     
     def _get_values(self, inputs):
-        """Tokenize the tweet."""
-        
+        """Tokenize the tweet."""       
         tokenized = []
         
         for tweet in inputs[0]:
