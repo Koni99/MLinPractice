@@ -18,7 +18,15 @@ class PhotoAdded(FeatureExtractor):
         
     def get_values(self, inputs):
     # check whether there is at least one photo
-        if (inputs.len() == 0):
-            return False
-        else:
-            return True
+        photo_list = []
+        
+        for i in inputs[0]:
+            if (i.len() == 0):
+                result = False
+            else:
+                result = True
+            photo_list.append(result)  
+        
+        photo_list = np.array(photo_list)
+        photo_list = photo_list.reshape(-1,1)
+        return photo_list
