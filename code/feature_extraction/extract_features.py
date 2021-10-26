@@ -26,7 +26,7 @@ parser.add_argument("-e", "--export_file", help = "create a pipeline and export 
 parser.add_argument("-i", "--import_file", help = "import an existing pipeline from the given location", default = None)
 parser.add_argument("-c", "--char_length", action = "store_true", help = "compute the number of characters in the tweet")
 parser.add_argument("-s", "--sentiment", action = "store_true", help = "compute the compound sentiment score in the tweet")
-parser.add_argument("-h", "--hashtags", action = "store_true", help = "count the number of hashtags in the tweet")
+parser.add_argument("-ha", "--hashtags", action = "store_true", help = "count the number of hashtags in the tweet")
 parser.add_argument("-p", "--photo_added", action = "store_true", help = "check whether tweet has a photo added")
 args = parser.parse_args()
 

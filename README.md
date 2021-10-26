@@ -89,7 +89,7 @@ Here, `input.csv` is the respective training, validation, or test set file creat
 The features to be extracted can be configured with the following optional parameters:
 - `-c` or `--char_length`: Count the number of characters in the "tweet" column of the data frame. (see code/feature_extraction/character_length.py)
 - `-s` or `--sentiment`: Compute the compound sentiment score of the "tweet" column of the data frame. (see code/feature_extraction/sentiment_analysis.py)
-- `-h` or `--hashtags`: Count the number of hashtags in the "hashtags" column of the data frame.
+- `-ha` or `--hashtags`: Count the number of hashtags in the "hashtags" column of the data frame.
 - `-p` or `--photo_added`: Check whether data frame has at least one photo added (see code/feature_extraction/photo_added.py)
 
 Moreover, the script support importing and exporting fitted feature extractors with the following optional arguments:
