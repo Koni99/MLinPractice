@@ -23,12 +23,11 @@ class SentimentAnalysis(FeatureExtractor):
     # don't need to fit, so don't overwrite _set_variables()
     
     # compute the sentiment score based on the inputs
-    def _get_values(self, inputs):
-        print(inputs[:10])
+    def _get_values(self, inputs):       
         sentiment = SentimentIntensityAnalyzer()
         result = []
-        for tweet in inputs:
-            score = sentiment.polarity_scores(tweet[0])
+        for tweet in inputs[0]:
+            score = sentiment.polarity_scores(tweet)
             # we are only interested in the compound score
             result.append(score["compound"])
         result = np.array(result)
