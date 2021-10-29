@@ -14,6 +14,7 @@ COLUMN_LIKES = "likes_count"
 COLUMN_RETWEETS = "retweets_count"
 COLUMN_HASHTAGS = "hashtags"
 COLUMN_PHOTOS = "photos"
+COLUMN_VIDEO = "video"
 
 # column names of novel columns for preprocessing
 COLUMN_LABEL = "label"

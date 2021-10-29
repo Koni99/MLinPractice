@@ -91,6 +91,7 @@ The features to be extracted can be configured with the following optional param
 - `-s` or `--sentiment`: Compute the compound sentiment score of the "tweet" column of the data frame. (see code/feature_extraction/sentiment_analysis.py)
 - `-ha` or `--hashtags`: Count the number of hashtags in the "hashtags" column of the data frame.
 - `-p` or `--photo_added`: Check whether data frame has at least one photo added (see code/feature_extraction/photo_added.py)
+- `-v` or `--video_added`: Check whether data frame has at least one video added (see code/feature_extraction/video_added.py)
 
 Moreover, the script support importing and exporting fitted feature extractors with the following optional arguments:
 - `-i` or `--import_file`: Load a configured and fitted feature extraction from the given pickle file. Ignore all parameters that configure the features to extract.

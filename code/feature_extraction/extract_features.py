@@ -13,10 +13,11 @@ import pandas as pd
 import numpy as np
 from code.feature_extraction.character_length import CharacterLength
 from code.feature_extraction.photo_added import PhotoAdded
+from code.feature_extraction.video_added import VideoAdded
 from code.feature_extraction.feature_collector import FeatureCollector
 from code.feature_extraction.sentiment_analysis import SentimentAnalysis
 from code.feature_extraction.hashtag_counter import HashtagCounter 
-from code.util import COLUMN_TWEET, COLUMN_LABEL, COLUMN_HASHTAGS, COLUMN_PHOTOS
+from code.util import COLUMN_TWEET, COLUMN_LABEL, COLUMN_HASHTAGS, COLUMN_PHOTOS, COLUMN_VIDEO
 
 # setting up CLI
 parser = argparse.ArgumentParser(description = "Feature Extraction")
@@ -28,6 +29,7 @@ parser.add_argument("-c", "--char_length", action = "store_true", help = "comput
 parser.add_argument("-s", "--sentiment", action = "store_true", help = "compute the compound sentiment score in the tweet")
 parser.add_argument("-ha", "--hashtags", action = "store_true", help = "count the number of hashtags in the tweet")
 parser.add_argument("-p", "--photo_added", action = "store_true", help = "check whether tweet has a photo added")
+parser.add_argument("-v", "--video_added", action = "store_true", help = "check whether tweet has a video added")
 args = parser.parse_args()
 
 # load data
@@ -48,6 +50,9 @@ else:    # need to create FeatureCollector manually
     if args.photo_added:
         # check whether tweet has a photo added
         features.append(PhotoAdded(COLUMN_PHOTOS))
+    if args.video_added:
+        # check whether tweet has a video added
+        features.append(VideoAdded(COLUMN_VIDEO))
     if args.sentiment:
         # compound sentiment score of original tweet (without any changes)
         features.append(SentimentAnalysis(COLUMN_TWEET))
