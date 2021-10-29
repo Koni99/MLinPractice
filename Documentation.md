@@ -10,7 +10,9 @@
 - we used nltk.VADER which is specifically attuned to sentiments expressed in social media
 - our function returns a score between -1 very negative and 1 very positive.
 - our hypothesis is that tweets that are in the outer range either very negative or very positive will be more popular than neutral tweets with scores around 0.
-
+**HashtagCounter**
+-count number of hashtags 
+- we assume that tweets with many hashtags attract more attention than tweets without hashtags.
 ## Dimensionality Reduction
 
 ## Classification
@@ -34,12 +36,16 @@
 - measures interrater reliability (reliability for two raters that are rating the same thing, corrected for how often that the raters may agree by chance)
 - appropriate for imbalanced data sets
 
+We chose these evaluation metrics due to their respective properties, because they are good to use in our highly imbalanced data set (5% viral 95% not)
+
 ### Evaluation baseline
+**Majority vote classifier**
+- always predicts the majority class (in our case "not viral")
 
 **Uniform distribution classifier**
 - generates predictions uniformly at random
 
-**Stratified classifier**
-- generates random predictions by respecting the training set class distribution -> label frequency
+**Frequency classifier**
+- generates random predictions respecting the training set class distribution (i.e. the label frequency)
 
 ## Application
