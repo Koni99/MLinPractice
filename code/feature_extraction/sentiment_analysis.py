@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+ #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Sentiment analysis: Every tweet gets a sentiment score ranging between -1 and 1.
@@ -8,6 +8,7 @@ Created on Thu Oct  7 17:24:23 2021
 @author: kstroemel
 """
 import nltk
+import numpy as np
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 nltk.download("vader_lexicon")
 from code.feature_extraction.feature_extractor import FeatureExtractor
@@ -23,13 +24,19 @@ class SentimentAnalysis(FeatureExtractor):
     
     # compute the sentiment score based on the inputs
     def _get_values(self, inputs):
+        print(inputs[:10])
         sentiment = SentimentIntensityAnalyzer()
-        # maybe for input in inputs?? -> run test
-        score = sentiment.polarity_scores(inputs)
+        result = []
+        for tweet in inputs:
+            score = sentiment.polarity_scores(tweet[0])
+            # we are only interested in the compound score
+            result.append(score["compound"])
+        result = np.array(result)
+        result = result.reshape(-1,1)
+        return result
         
-        #return the compound score not the individual ones
-        return score["compound"]
         
+
         
     
 
