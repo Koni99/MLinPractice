@@ -12,10 +12,12 @@ import argparse, csv, pickle
 import pandas as pd
 import numpy as np
 from code.feature_extraction.character_length import CharacterLength
+from code.feature_extraction.photo_added import PhotoAdded
+from code.feature_extraction.video_added import VideoAdded
 from code.feature_extraction.feature_collector import FeatureCollector
 from code.feature_extraction.sentiment_analysis import SentimentAnalysis
 from code.feature_extraction.hashtag_counter import HashtagCounter 
-from code.util import COLUMN_TWEET, COLUMN_LABEL, COLUMN_HASHTAGS
+from code.util import COLUMN_TWEET, COLUMN_LABEL, COLUMN_HASHTAGS, COLUMN_PHOTOS, COLUMN_VIDEO
 
 # setting up CLI
 parser = argparse.ArgumentParser(description = "Feature Extraction")
@@ -25,7 +27,9 @@ parser.add_argument("-e", "--export_file", help = "create a pipeline and export 
 parser.add_argument("-i", "--import_file", help = "import an existing pipeline from the given location", default = None)
 parser.add_argument("-c", "--char_length", action = "store_true", help = "compute the number of characters in the tweet")
 parser.add_argument("-s", "--sentiment", action = "store_true", help = "compute the compound sentiment score in the tweet")
-parser.add_argument("-h", "--hashtags", action = "store_true", help = "count the number of hashtags in the tweet")
+parser.add_argument("-ha", "--hashtags", action = "store_true", help = "count the number of hashtags in the tweet")
+parser.add_argument("-p", "--photo_added", action = "store_true", help = "check whether tweet has a photo added")
+parser.add_argument("-v", "--video_added", action = "store_true", help = "check whether tweet has a video added")
 args = parser.parse_args()
 
 # load data
@@ -43,7 +47,12 @@ else:    # need to create FeatureCollector manually
     if args.char_length:
         # character length of original tweet (without any changes)
         features.append(CharacterLength(COLUMN_TWEET))
-    
+    if args.photo_added:
+        # check whether tweet has a photo added
+        features.append(PhotoAdded(COLUMN_PHOTOS))
+    if args.video_added:
+        # check whether tweet has a video added
+        features.append(VideoAdded(COLUMN_VIDEO))
     if args.sentiment:
         # compound sentiment score of original tweet (without any changes)
         features.append(SentimentAnalysis(COLUMN_TWEET))
