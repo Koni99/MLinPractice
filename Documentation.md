@@ -10,26 +10,32 @@
 - we used nltk.VADER which is specifically attuned to sentiments expressed in social media
 - our function returns a score between -1 very negative and 1 very positive.
 - our hypothesis is that tweets that are in the outer range either very negative or very positive will be more popular than neutral tweets with scores around 0.
-**HashtagCounter**
--count number of hashtags 
-- we assume that tweets with many hashtags attract more attention than tweets without hashtags.
-**PhotoAdded**
-- check whether a tweet has at least one photo added
-- we assume that a tweet with photos added is more likely to go viral
 
+**HashtagCounter**
+- count number of hashtags 
+- we assume that tweets with many hashtags attract more attention than tweets without hashtags.
+
+**PhotoAdded**
+- checks whether a tweet has a photo added.
+- we assume that tweets with photos added will be more popular than pure text.
+
+**VideoAdded**
+- checks whether there is a video added to a tweet.
+- we assume that tweets with videos attract more attention than those without.
 
 ## Dimensionality Reduction
+- we don't need dimensionality reduction due to small number of features.
 
 ## Classification
 
 ### Evaluation metrics
 **Accuracy**
-- total number of correct predictions divided by total number of predictions in the data set
-- default implementation but inappropriate due to imbalanced data set
+- total number of correct predictions divided by total number of predictions in the data set.
+- default implementation but inappropriate due to imbalanced data set.
 
 **Balanced Accuracy**
-- arithmetic mean of precision (number of positive class predictions that actually belong to the positive class) and recall (positive class predictions made out of all positive examples)
-- variant of accuracy metric that is more appropriate for imbalanced data sets
+- arithmetic mean of precision (number of positive class predictions that actually belong to the positive class) and recall (positive class predictions made out of all positive examples).
+- variant of accuracy metric that is more appropriate for imbalanced data sets.
 
 **F1 Score**
 - balances precision and recall in a single number
