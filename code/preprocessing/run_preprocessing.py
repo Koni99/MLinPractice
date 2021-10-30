@@ -14,7 +14,7 @@ from sklearn.pipeline import make_pipeline
 from code.preprocessing.lower_case import LowerCase
 from code.preprocessing.punctuation_remover import PunctuationRemover
 from code.preprocessing.tokenizer import Tokenizer
-from code.util import COLUMN_TWEET, SUFFIX_TOKENIZED
+from code.util import COLUMN_TWEET, SUFFIX_TOKENIZED, SUFFIX_LOWERCASED
 
 # setting up CLI
 parser = argparse.ArgumentParser(description = "Various preprocessing steps")
@@ -35,7 +35,7 @@ preprocessors = []
 if args.punctuation:
     preprocessors.append(PunctuationRemover())
 if args.lowercase:
-    preprocessors.append(LowerCase())
+    preprocessors.append(LowerCase(COLUMN_TWEET, COLUMN_TWEET + SUFFIX_LOWERCASED))
 if args.tokenize:
     preprocessors.append(Tokenizer(args.tokenize_input, args.tokenize_input + SUFFIX_TOKENIZED))
 
