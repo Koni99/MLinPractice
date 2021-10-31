@@ -20,7 +20,6 @@ COLUMN_VIDEO = "video"
 COLUMN_LABEL = "label"
 COLUMN_PUNCTUATION = "tweet_no_punctuation"
 COLUMN_STOPWORDS = "tweet_no_stopwords"
-SUFFIX_LOWERCASED = "_lowercased"
-SUFFIX_TOKENIZED = "_tokenized"
 COLUMN_TOKENIZED = "tweet_tokenized"
+COLUMN_LOWERCASED_AND_TOKENIZED = "tweet_lowercased_and_tokenized"
 

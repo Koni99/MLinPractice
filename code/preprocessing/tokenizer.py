@@ -16,7 +16,7 @@ class Tokenizer(Preprocessor):
     """Tokenizes the given input column into individual words."""
     
     def __init__(self, input_column):
-        """Initialize the Tokenizer with the given input and output column."""
+        """Initialize the Tokenizer with the given input and store output in COLUMN_TOKENIZED"""
         super().__init__([input_column], COLUMN_TOKENIZED)
     
     # don't need to implement _set_variables(), since no variables to set
