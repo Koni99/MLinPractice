@@ -26,7 +26,7 @@
 
 **StopwordsCounter**
 - counts the stopwords that occur in a tweet.
-- we assume that tweets with more stopwords will gain less attraction because they contain less information per word.
+- less stopwords like e.g. "the" or "a" means more information is packed into the tweet, as the total number of words is restricted. Tweets don't have to always be gramatically correct, but are sometimes rather structured in bullet points. We think this might have an impact on the popularity of the tweet.
 
 ## Dimensionality Reduction
 - we don't need dimensionality reduction due to small number of features.
