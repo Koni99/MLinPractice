@@ -1,30 +1,30 @@
 # Documentation
 
 ## Preprocessing
-**Lower case**
+**Lowercaser**
 - turns every word in the tweet into lower case. Otherwise our classifier would think of e.g. "Dog" and "dog" as two completly different words.
 - the lowercased and tokenized tweet later operates as input to the stopwords counter. Lowercased words can be detected as stopwords.
 
 ## Feature Extraction
 **Sentiment Analysis**
 - added compound sentiment score as a feature. We argue that the sentiment of a tweet has an influence on its virality. 
-- we used nltk.VADER which is specifically attuned to sentiments expressed in social media
+- we used nltk.VADER which is specifically attuned to sentiments expressed in social media.
 - our function returns a score between -1 very negative and 1 very positive.
 - our hypothesis is that tweets that are in the outer range either very negative or very positive will be more popular than neutral tweets with scores around 0.
 
-**HashtagCounter**
-- count number of hashtags 
-- we assume that tweets with many hashtags attract more attention than tweets without hashtags.
+**Hashtag Counter**
+- count number of hashtags.
+- we assume that tweets with many hashtags attract more attention than tweets without hashtags, as tweets with hashtags added can be found additionally via that hashtag.
 
-**PhotoAdded**
+**Detect Photos**
 - checks whether a tweet has a photo added.
 - we assume that tweets with photos added will be more popular than pure text.
 
-**VideoAdded**
+**Detect Videos**
 - checks whether there is a video added to a tweet.
 - we assume that tweets with videos attract more attention than those without.
 
-**StopwordsCounter**
+**Stopwords Counter**
 - counts the stopwords that occur in a tweet.
 - less stopwords like e.g. "the" or "a" means more information is packed into the tweet, as the total number of words is restricted. Tweets don't have to always be gramatically correct, but are sometimes rather structured in bullet points. We think this might have an impact on the popularity of the tweet.
 
