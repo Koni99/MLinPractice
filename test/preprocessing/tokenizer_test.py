@@ -14,8 +14,8 @@ class TokenizerTest(unittest.TestCase):
     
     def setUp(self):
         self.INPUT_COLUMN = "input"
-        self.OUTPUT_COLUMN = "output"
-        self.tokenizer = Tokenizer(self.INPUT_COLUMN, self.OUTPUT_COLUMN)
+        self.OUTPUT_COLUMN = "tweet_tokenized"
+        self.tokenizer = Tokenizer(self.INPUT_COLUMN)
     
     def test_boolean(self):
         self.assertEqual(True, not False)

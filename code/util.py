@@ -19,6 +19,6 @@ COLUMN_VIDEO = "video"
 # column names of novel columns for preprocessing
 COLUMN_LABEL = "label"
 COLUMN_PUNCTUATION = "tweet_no_punctuation"
-SUFFIX_LOWERCASED = "_lowercased"
-SUFFIX_TOKENIZED = "_tokenized"
+COLUMN_TOKENIZED = "tweet_tokenized"
+COLUMN_LOWERCASED_AND_TOKENIZED = "tweet_lowercased_and_tokenized"
 

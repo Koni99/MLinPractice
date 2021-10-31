@@ -14,7 +14,7 @@ from sklearn.pipeline import make_pipeline
 from code.preprocessing.lower_case import LowerCase
 from code.preprocessing.punctuation_remover import PunctuationRemover
 from code.preprocessing.tokenizer import Tokenizer
-from code.util import COLUMN_TWEET, SUFFIX_TOKENIZED, SUFFIX_LOWERCASED
+from code.util import COLUMN_TWEET
 
 # setting up CLI
 parser = argparse.ArgumentParser(description = "Various preprocessing steps")
@@ -22,7 +22,7 @@ parser.add_argument("input_file", help = "path to the input csv file")
 parser.add_argument("output_file", help = "path to the output csv file")
 parser.add_argument("-p", "--punctuation", action = "store_true", help = "remove punctuation")
 parser.add_argument("-t", "--tokenize", action = "store_true", help = "tokenize given column into individual words")
-parser.add_argument("-l", "--lowercase", action = "store_true", help = "turn text input into lower case")
+parser.add_argument("-l", "--lowercase", action = "store_true", help = "turn tokenized input into lower case")
 parser.add_argument("--tokenize_input", help = "input column to tokenize", default = COLUMN_TWEET)
 parser.add_argument("-e", "--export_file", help = "create a pipeline and export to the given location", default = None)
 args = parser.parse_args()
@@ -34,10 +34,11 @@ df = pd.read_csv(args.input_file, quoting = csv.QUOTE_NONNUMERIC, lineterminator
 preprocessors = []
 if args.punctuation:
     preprocessors.append(PunctuationRemover())
-if args.lowercase:
-    preprocessors.append(LowerCase(COLUMN_TWEET, COLUMN_TWEET + SUFFIX_LOWERCASED))
 if args.tokenize:
-    preprocessors.append(Tokenizer(args.tokenize_input, args.tokenize_input + SUFFIX_TOKENIZED))
+    preprocessors.append(Tokenizer(args.tokenize_input))
+if args.lowercase and args.lowercase:
+# lowercaser only works if tweet is already tokenized    
+    preprocessors.append(LowerCase())
 
 # call all preprocessing steps
 for preprocessor in preprocessors:
