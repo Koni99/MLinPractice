@@ -52,7 +52,7 @@
 - measures interrater reliability (reliability for two raters that are rating the same thing, corrected for how often that the raters may agree by chance)
 - appropriate for imbalanced data sets
 
-We chose these evaluation metrics due to their respective properties, because they are good to use in our highly imbalanced data set (5% viral 95% not)
+We chose these evaluation metrics due to their respective properties, because they are good to use in our highly imbalanced data set (9% viral 91% not)
 
 ### Evaluation baseline
 **Majority vote classifier**
@@ -67,4 +67,55 @@ We chose these evaluation metrics due to their respective properties, because th
 **KNN classifier**
 - predicts class due to k closest training examples in the data set
 
-## Application
+## Hyperparameter Optimization
+**KNN classifier grid search**
+k: number of neighbours    
+Scores for accurcay and balanced accuracy in percent (between 0 and 100%).   
+Scores for Cohen's Kappa and F1 Score between 0 and 1.   
+Respective score on training set / validation set   
+
+| k  | Accuracy |Cohen's Kappa |F1 |Balanced Accuracy|
+|---|---|---|---|---|
+| 1 |82.87 / 82.78|0.0227 / 0.0237|0.1173 / 0.1188|51.12 / 51.26|
+| 2 |90.01 / 90.03|0.0119 / 0.0138|0.0319 / 0.0337|50.36 / 50.42|
+| 3 |87.34 / 87.39|0.0356 / 0.0415|0.0967 / 0.1025|51.40 / 51.64|
+| 4 |89.99 / 89.93|0.0144 / 0.0114|0.0353 / 0.0328|50.44 / 50.35|
+| 5 |89.10 / 89.14|0.0240 / 0.0266|0.0615 / 0.0638|50.80 / 50.89|
+| 6 |90.82 / 90.82|0.0000 / 0.0000|0.0000 / 0.0000|50.00 / 50.00|
+| 7 |89.97 / 89.92|0.0138 / 0.0143|0.0350 / 0.0365|50.42 / 50.44|
+| 8 |90.40 / 90.36|0.0104 / 0.0089|0.0220 / 0.0213|50.30 / 50.26|
+| 9 |90.40 / 90.36|0.0104 / 0.0089|0.0220 / 0.0213|50.30 / 50.26|
+|10 |90.40 / 90.36|0.0104 / 0.0089|0.0220 / 0.0213|50.30 / 50.26|   
+
+After the grid search we decided to use KNN with 3 nearest neighbours, because it got the highest Cohen's Kappa score, highest balanced accuracy and second highest F1 score.   
+
+## Results  
+Now we want to evaluate our ML model in comparison to our three baseline classifiers.  
+
+**Training set** 
+|Classifier| Accuracy |Cohen's Kappa |F1 |Balanced Accuracy|
+|---|---|---|---|---|
+|Majority vote|90.82|0.0000|0.0000|50.00|
+|Label frequency|83.46|0.0043|0.09547|50.22|
+|Uniform distribution|50.05|0.0014|0.1563|50.21|
+|K-nearest neighbours|87.34|0.0356|0.0967|51.40|   
+
+**Validation set** 
+|Classifier| Accuracy |Cohen's Kappa |F1 |Balanced Accuracy|
+|---|---|---|---|---|
+|Majority vote|90.82|0.0000|0.0000|50.00|
+|Label frequency|83.27|-0.0048|0.0873|49.76|
+|Uniform distribution|50.08|-8.2331|0.1550|49.98|
+|K-nearest neighbours|87.39|0.0415|0.1025|51.64|   
+
+**Test set** 
+|Classifier| Accuracy |Cohen's Kappa |F1 |Balanced Accuracy|
+|---|---|---|---|---|
+|Majority vote|90.82|0.0000|0.0000|50.00|
+|Label frequency|83.37|0.0007|0.0922|50.03|
+|Uniform distribution|50.03|-0.0010|0.1542|49.99|
+|K-nearest neighbours|87.22|0.0286|0.0904|51.13|   
+
+**Discussion**   
+Because our data set is highly imbalanced the majority vote classifier still achieves the highest accuracy. But our KNN model reaches the highest balanced accuracy and Cohen's Kappa score on training, validation and test set. All in all there is still a lot of room for improvements. That is due to the fact that we did not implement many features and also tried only a few preprocessing steps. In future works one could for example try to add features based on the POS (part-of-speech) tag and count the number of adjectives and adverbs in a tweet or use the metadata like time of the day it was published. 
+
