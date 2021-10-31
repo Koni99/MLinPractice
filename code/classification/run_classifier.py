@@ -11,7 +11,7 @@ Created on Wed Sep 29 14:23:48 2021
 import argparse, pickle
 from sklearn.dummy import DummyClassifier
 
-from sklearn.metrics import accuracy_score, cohen_kappa_score
+from sklearn.metrics import accuracy_score, cohen_kappa_score, balanced_accuracy_score, f1_score
 from sklearn.preprocessing import StandardScaler
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.pipeline import make_pipeline
@@ -31,6 +31,7 @@ parser.add_argument("-a", "--accuracy", action = "store_true", help = "evaluate 
 parser.add_argument("-b", "--balanced_accuracy", action = "store_true", help = "evaluate using balanced accuracy")
 parser.add_argument("-f1", "--f1_score", action = "store_true", help = "evaluate using f1 score")
 parser.add_argument("-k", "--kappa", action = "store_true", help = "evaluate using Cohen's kappa")
+parser.add_argument("-knn", type = int, help = "k nearest neighbour classifier with specified k")
 parser.add_argument("--log_folder", help = "where to log the mlflow results", default = "data/classification/mlflow")
 
 args = parser.parse_args()
@@ -44,7 +45,13 @@ set_tracking_uri(args.log_folder)
 if args.import_file is not None:
     # import a pre-trained classifier
     with open(args.import_file, 'rb') as f_in:
-        classifier = pickle.load(f_in)
+        input_dict = pickle.load(f_in)
+        
+    classifier = input_dict["classifier"]
+    for param, value in input_dict["params"].items():
+        log_param(param, value)
+        
+    log_param("dataset", "validation")
 
 else:   # manually set up a classifier
     
@@ -66,9 +73,9 @@ else:   # manually set up a classifier
         log_param("classifier", "frequency")
         params = {"classifier": "frequency"}
         classifier = DummyClassifier(strategy = "stratified", random_state = args.seed)
-        
-    
+           
     elif args.knn is not None:
+        # knn classifier
         print("    {0} nearest neighbor classifier".format(args.knn))
         log_param("classifier", "knn")
         log_param("k", args.knn)
