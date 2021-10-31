@@ -65,6 +65,8 @@ else:   # manually set up a classifier
     elif args.uniform:
         # uniform distribution classifier
         print("    uniform distribution classifier")
+        log_param("classifier", "uniform")
+        params = {"classifier": "uniform"}
         classifier = DummyClassifier(strategy = "uniform", random_state = args.seed)
         
     elif args.frequency:
