@@ -10,13 +10,14 @@ Created on Wed Oct  6 13:59:54 2021
 
 from code.preprocessing.preprocessor import Preprocessor
 import nltk
+from code.util import COLUMN_TOKENIZED
 
 class Tokenizer(Preprocessor):
     """Tokenizes the given input column into individual words."""
     
-    def __init__(self, input_column, output_column):
+    def __init__(self, input_column):
         """Initialize the Tokenizer with the given input and output column."""
-        super().__init__([input_column], output_column)
+        super().__init__([input_column], COLUMN_TOKENIZED)
     
     # don't need to implement _set_variables(), since no variables to set
     

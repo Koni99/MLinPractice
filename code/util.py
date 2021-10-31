@@ -22,4 +22,5 @@ COLUMN_PUNCTUATION = "tweet_no_punctuation"
 COLUMN_STOPWORDS = "tweet_no_stopwords"
 SUFFIX_LOWERCASED = "_lowercased"
 SUFFIX_TOKENIZED = "_tokenized"
+COLUMN_TOKENIZED = "tweet_tokenized"
 

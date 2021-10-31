@@ -12,7 +12,6 @@ import argparse, csv, pickle
 import pandas as pd
 from sklearn.pipeline import make_pipeline
 from code.preprocessing.lower_case import LowerCase
-from code.preprocessing.stopwords_remover import StopwordsRemover
 from code.preprocessing.punctuation_remover import PunctuationRemover
 from code.preprocessing.tokenizer import Tokenizer
 from code.util import COLUMN_TWEET, SUFFIX_TOKENIZED, SUFFIX_LOWERCASED
@@ -25,7 +24,6 @@ parser.add_argument("-p", "--punctuation", action = "store_true", help = "remove
 parser.add_argument("-t", "--tokenize", action = "store_true", help = "tokenize given column into individual words")
 parser.add_argument("-l", "--lowercase", action = "store_true", help = "turn text input into lower case")
 parser.add_argument("--tokenize_input", help = "input column to tokenize", default = COLUMN_TWEET)
-parser.add_argument("-s", "--stopwords", action = "store_true", help = "remove stopwords")
 parser.add_argument("-e", "--export_file", help = "create a pipeline and export to the given location", default = None)
 args = parser.parse_args()
 
@@ -36,12 +34,10 @@ df = pd.read_csv(args.input_file, quoting = csv.QUOTE_NONNUMERIC, lineterminator
 preprocessors = []
 if args.punctuation:
     preprocessors.append(PunctuationRemover())
-if args.stopwords:
-    preprocessors.append(StopwordsRemover())
 if args.lowercase:
     preprocessors.append(LowerCase(COLUMN_TWEET, COLUMN_TWEET + SUFFIX_LOWERCASED))
 if args.tokenize:
-    preprocessors.append(Tokenizer(args.tokenize_input, args.tokenize_input + SUFFIX_TOKENIZED))
+    preprocessors.append(Tokenizer(args.tokenize_input))
 
 
 # call all preprocessing steps
