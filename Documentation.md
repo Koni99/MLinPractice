@@ -3,6 +3,7 @@
 ## Preprocessing
 **Lower case**
 - turns every word in the tweet into lower case. Otherwise our classifier would think of e.g. "Dog" and "dog" as two completly different words.
+- the lowercased and tokenized tweet later operates as input to the stopwords counter. Lowercased words can be detected as stopwords.
 
 ## Feature Extraction
 **Sentiment Analysis**
@@ -22,6 +23,10 @@
 **VideoAdded**
 - checks whether there is a video added to a tweet.
 - we assume that tweets with videos attract more attention than those without.
+
+**StopwordsCounter**
+- counts the stopwords that occur in a tweet.
+- we assume that tweets with more stopwords will gain less attraction because they contain less information per word.
 
 ## Dimensionality Reduction
 - we don't need dimensionality reduction due to small number of features.
