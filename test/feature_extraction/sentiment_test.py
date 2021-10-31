@@ -16,20 +16,19 @@ class SentimentTest(unittest.TestCase):
     def setUp(self):
         self.INPUT_COLUMN = "input"
         self.sentiment = SentimentAnalysis(self.INPUT_COLUMN)
-        
         self.df = pd.DataFrame()
         self.df[self.INPUT_COLUMN] = ["This is a good tweet"]
     
-    def test_input_columns(self):
-    # check whether the input columns match    
+    # check whether the input columns match 
+    def test_input_columns(self):   
         self.assertEqual(self.sentiment._input_columns, [self.INPUT_COLUMN])
 
-    def test_feature_name(self):
-    # check whether the feature names match    
+    # check whether the feature names match     
+    def test_feature_name(self):   
         self.assertEqual(self.sentiment.get_feature_name(), self.INPUT_COLUMN + "_sentiment_score")
 
-    def test_if_right_sentiment_score(self):
     # check whether SentimentAnalysis returns correct sentiment score (calculated in seperate jupyter notebook)
+    def test_if_right_sentiment_score(self):
         sentimentAnalysed = self.sentiment.fit_transform(self.df)
         # the respective scores that we calculated manually
         expected_output = 0.4404

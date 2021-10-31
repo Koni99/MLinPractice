@@ -14,8 +14,10 @@ class HashtagCounter(FeatureExtractor):
     def __init__(self, input_column):
         super().__init__([input_column],"{0}_number_of_hashtags".format(input_column))
 
+    # don't need to fit, so don't overwrite _set_variables()
+    
+    # count number of hashtags
     def _get_values(self, inputs):
-        """Count number of hashtags."""
         hashtag_list = []
 
         for i in inputs[0]:

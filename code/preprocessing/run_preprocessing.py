@@ -33,11 +33,14 @@ df = pd.read_csv(args.input_file, quoting = csv.QUOTE_NONNUMERIC, lineterminator
 # collect all preprocessors
 preprocessors = []
 if args.punctuation:
+    # remove punctuation of a tweet
     preprocessors.append(PunctuationRemover())
 if args.tokenize:
+    # tokenize input
     preprocessors.append(Tokenizer(args.tokenize_input))
 if args.lowercase and args.lowercase:
-# lowercaser only works if tweet is already tokenized    
+    # lowercase input column
+    # lowercaser only works if tweet is already tokenized    
     preprocessors.append(LowerCase())
 
 # call all preprocessing steps

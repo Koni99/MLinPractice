@@ -14,10 +14,11 @@ class PhotoAdded(FeatureExtractor):
     # constructor
     def __init__(self, input_column):
         super().__init__([input_column], "{0}_photo_added".format(input_column))
-        
-        
-    def _get_values(self, inputs):
+    
+    # don't need to fit, so don't overwrite _set_variables()
+    
     # check whether there is at least one photo
+    def _get_values(self, inputs):
         photo_list = []
         
         for i in inputs[0]:

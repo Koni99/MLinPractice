@@ -13,10 +13,8 @@ from nltk.sentiment.vader import SentimentIntensityAnalyzer
 nltk.download("vader_lexicon")
 from code.feature_extraction.feature_extractor import FeatureExtractor
 
-#class for our sentiment analyser
 class SentimentAnalysis(FeatureExtractor):
     #constructor
-    # double check that not sure about output name
     def __init__(self, input_column):
         super().__init__([input_column], "{0}_sentiment_score".format(input_column))
     

@@ -17,12 +17,15 @@ class LowercaserTest(unittest.TestCase):
         self.OUTPUT_COLUMN = "tweet_lowercased_and_tokenized"
         self.lowercaser = LowerCase()
     
+    # test if input columns match
     def test_input_columns(self):
         self.assertListEqual(self.lowercaser._input_columns, [self.INPUT_COLUMN])
 
+    # test if output columns match
     def test_output_column(self):
         self.assertEqual(self.lowercaser._output_column, self.OUTPUT_COLUMN)
 
+    # test if single tokenized sentence gets lowercased correctly
     def test_lowercase_single_sentence(self):
         input_text = "'This', 'Is', 'An', 'Example', 'Input'"
         output_text = "'this', 'is', 'an', 'example', 'input'"

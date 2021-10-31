@@ -15,14 +15,16 @@ class StopwordsCounter(FeatureExtractor):
     def __init__(self, input_column):
         super().__init__([input_column],"{0}_number_of_stopwords".format(input_column))
 
+    # don't need to fit, so don't overwrite _set_variables()
+    
+    #count the number of stopwords    
     def _get_values(self, inputs):
-        """Count number of stopwords"""
         stop_words = set(stopwords.words('english'))
         
         stopwords_counts = []
 
-        for i in inputs[0]:
-        # filter all stopwords of one tweet, count the number of stopwords    
+        # filter all stopwords of one tweet, count the number of stopwords         
+        for i in inputs[0]:   
             stp_one_tweet = []
             
             for word in i:
