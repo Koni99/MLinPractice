@@ -29,7 +29,7 @@ class StopwordsTest(unittest.TestCase):
         self.assertEqual(self.stopwords.get_feature_name(), self.INPUT_COLUMN + "_number_of_stopwords")
 
     def test_if_number_of_stopwords_correct(self):
-    # check whether StopwordsCounter returns the correct value of hashtags
+    # check whether StopwordsCounter returns the correct value of stopwords
         stopwordscounter = self.stopwords.fit_transform(self.df)    
         expected_output = 4
         self.assertEqual(stopwordscounter[0][0], expected_output)

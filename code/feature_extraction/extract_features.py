@@ -18,7 +18,7 @@ from code.feature_extraction.video_added import VideoAdded
 from code.feature_extraction.feature_collector import FeatureCollector
 from code.feature_extraction.sentiment_analysis import SentimentAnalysis
 from code.feature_extraction.hashtag_counter import HashtagCounter 
-from code.util import COLUMN_TWEET, COLUMN_LABEL, COLUMN_HASHTAGS, COLUMN_PHOTOS, COLUMN_VIDEO, COLUMN_TOKENIZED
+from code.util import COLUMN_TWEET, COLUMN_LABEL, COLUMN_HASHTAGS, COLUMN_PHOTOS, COLUMN_VIDEO, COLUMN_LOWERCASED_AND_TOKENIZED
 
 # setting up CLI
 parser = argparse.ArgumentParser(description = "Feature Extraction")
@@ -51,7 +51,7 @@ else:    # need to create FeatureCollector manually
         features.append(CharacterLength(COLUMN_TWEET))
     if args.stopwords:
         # count number of stopwords
-        features.append(StopwordsCounter(COLUMN_TOKENIZED))
+        features.append(StopwordsCounter(COLUMN_LOWERCASED_AND_TOKENIZED))
     if args.photo_added:
         # check whether tweet has a photo added
         features.append(PhotoAdded(COLUMN_PHOTOS))
