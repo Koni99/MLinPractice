@@ -64,10 +64,11 @@ We chose these evaluation metrics due to their respective properties, because th
 **Frequency classifier**
 - generates random predictions respecting the training set class distribution (i.e. the label frequency)
 
+## ML model
 **KNN classifier**
-- predicts class due to k closest training examples in the data set
+- predicts class based on k closest training examples (k nearest neighbours) in the data set
 
-## Hyperparameter Optimization
+### Hyperparameter Optimization
 **KNN classifier grid search**
 k: number of neighbours    
 Scores for accurcay and balanced accuracy in percent (between 0 and 100%).   
