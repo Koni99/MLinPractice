@@ -64,4 +64,7 @@ We chose these evaluation metrics due to their respective properties, because th
 **Frequency classifier**
 - generates random predictions respecting the training set class distribution (i.e. the label frequency)
 
+**KNN classifier**
+- predicts class due to k closest training examples in the data set
+
 ## Application
